@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1600" height="900" fill="#efe8dc"/>
+  <g fill="#c59d5f" opacity="0.9">
+    <rect x="0" y="700" width="1600" height="200" />
+  </g>
+  <text x="50%" y="50%" text-anchor="middle" font-family="Playfair Display, serif" font-size="48" fill="#213547">Foto de cabecera (placeholder)</text>
+</svg>
