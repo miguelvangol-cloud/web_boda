@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "vercel-build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
@@ -28,5 +29,9 @@
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.1.14"
+  }
+  ,
+  "engines": {
+    "node": "18.x"
   }
 }
