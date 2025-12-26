@@ -38,17 +38,14 @@ export default function Header() {
             <a className="menu-item" href="#hero" onClick={() => setOpen(false)}>
               Inicio
             </a>
-            <a className="menu-item" href="#our-story" onClick={() => setOpen(false)}>
-              Nuestra historia
-            </a>
-            <a className="menu-item" href="#gallery" onClick={() => setOpen(false)}>
-              Galería
-            </a>
-            <a className="menu-item" href="#rsvp" onClick={() => setOpen(false)}>
-              RSVP
-            </a>
-            <a className="menu-item" href="#map" onClick={() => setOpen(false)}>
+            <a className="menu-item" href="#ubicacion" onClick={() => setOpen(false)}>
               Ubicación
+            </a>
+            <a className="menu-item" href="#asistencia" onClick={() => setOpen(false)}>
+              Asistencia
+            </a>
+            <a className="menu-item" href="#alojamiento" onClick={() => setOpen(false)}>
+              Alojamiento
             </a>
           </nav>
         )}
@@ -56,14 +53,13 @@ export default function Header() {
 
       <div className="container header-inner">
         {/* Header left intentionally compact: title moved to hero */}
-        <div style={{height: '1px'}} aria-hidden></div>
+        <div style={{height: '0px'}} aria-hidden></div>
         {/* Desktop horizontal navigation (visible on wide screens) */}
         <nav className="desktop-nav" aria-label="Menú principal">
           <a href="#hero">Inicio</a>
-          <a href="#our-story">Nuestra historia</a>
-          <a href="#gallery">Galería</a>
-          <a href="#rsvp">RSVP</a>
-          <a href="#map">Ubicación</a>
+          <a href="#ubicacion">Ubicación</a>
+          <a href="#asistencia">Asistencia</a>
+          <a href="#alojamiento">Alojamiento</a>
         </nav>
       </div>
     </header>

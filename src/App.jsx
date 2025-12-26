@@ -1,24 +1,26 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import OurStory from "./components/OurStory";
-import Gallery from "./components/Gallery";
-import RSVPForm from "./components/RSVPForm";
-import Map from "./components/Map";
+import Location from "./components/Location";
+import Timetable from "./components/Timetable";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
-import Countdown from "./components/Countdown";
+import Assist from "./components/Assist";
+import PhotoStrip from "./components/PhotoStrip";
+import Alojamiento from "./components/Alojamiento";
+import ListaBoda from "./components/ListaBoda";
 
 export default function App() {
   return (
     <div className="app-root">
       <Header />
       <main className="app-main">
-  <Hero />
-  <Countdown />
-  <OurStory />
-        <Gallery />
-        <RSVPForm />
-        <Map />
+        <Hero />
+        <Location />
+        <Timetable />
+        <Alojamiento />
+        <Assist />
+        {/* <PhotoStrip /> */}
+        <ListaBoda />
       </main>
       <BackToTop />
       <Footer className="site-footer" />

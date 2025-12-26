@@ -1,35 +1,43 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+/* Rostemary font */
+@font-face {
+  font-family: 'Rostemary';
+  src: url('/rostemary/Rostemary.ttf') format('truetype');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-  color-scheme: light dark;
+/* Belleza font */
+@font-face {
+  font-family: 'Belleza';
+  src: url('/belleza/Belleza-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root { 
   /* Design tokens */
-  --color-ink: #213547;
-  --color-ivory: #f7f3ee;
-  --color-gold: #c59d5f;
-  --color-gold-600: #b78646;
-  --color-muted: #7b858f;
-  --bg-dark: #242424;
+  --black: #000000;
+  --verde-oliva-oscuro: #4a4a35;
+  --verde-oliva: #7e7d5b;
+  --naranja-apagado: #aca08a;
+  --amarillo: #cfa518;
+  --naranja-claro: #e2ccfe;
+  --color-muted: #7e7d5b;
+  --color-background:#e2dccf;
+  --color-naranja-apagado2: #b2933e;
+  --naranja-pastel-apagado: #d0b298;
 
-  color: rgba(255, 255, 255, 0.87);
-  background-color: var(--bg-dark);
+  
+  --header-offset: 36px; /* height to offset anchored scrolls, adjust if header size changes */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --header-offset: 64px; /* height to offset anchored scrolls, adjust if header size changes */
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  /* Font variables */
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-intro: 'Cormorant Garamond', serif;
 }
 
 body {
@@ -40,60 +48,10 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--color-ink);
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* Wedding theme utilities */
-
-:root {
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-}
-
-.font-cursive { font-family: var(--font-heading); }
-.text-gold { color: var(--color-gold); }
-.bg-ivory { background-color: var(--color-ivory); }
+.bg-ivory { background-color: var(--naranja-claro); }
 .text-muted { color: var(--color-muted); }
 .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
-.btn-primary { background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-600) 100%); color: white; padding: 0.6rem 1rem; border-radius: 8px; border: none; cursor: pointer; }
-.card { background: white; border-radius: 12px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-.rounded-xl { border-radius: 12px; }
-.shadow-md { box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
-.text-gold-600 { color: var(--color-gold-600); }
 
 /* Accessibility helpers */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -103,101 +61,10 @@ button:focus-visible {
 .app-main { flex: 1 0 auto; }
 .site-footer { flex-shrink: 0; }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .container { padding: 1rem; }
-  .text-5xl { font-size: 2rem; }
-  .text-4xl { font-size: 1.5rem; }
-  .hero { height: 50vh; }
-  .btn-primary { padding: 0.5rem 0.8rem; }
-  .card { padding: 1rem; }
-  .w-48 { width: 3rem; }
-}
-
-@media (max-width: 420px) {
-  .text-5xl { font-size: 1.6rem; }
-  .text-4xl { font-size: 1.25rem; }
-  .hero { height: 40vh; }
-}
-
-/* Hero default height */
-.hero { height: 70vh; }
-
-/* Image helpers */
-.img-responsive { width: 100%; height: auto; display: block; }
-.img-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ratio-16-9 { position: relative; width: 100%; padding-top: 56.25%; }
-.ratio-1-1 { position: relative; width: 100%; padding-top: 100%; }
-.ratio-inner { position: absolute; inset: 0; }
-
-/* Countdown section styles */
-.countdown-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  justify-items: center;
-  align-items: center;
-  max-width: 760px;
-  margin: 0 auto;
-}
-.countdown-unit { text-align: center; }
-.countdown-value {
-  font-family: var(--font-heading);
-  font-size: 2.25rem;
-  color: var(--color-ink);
-  background: linear-gradient(180deg, rgba(197,157,95,0.08), rgba(197,157,95,0.02));
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
-  min-width: 72px;
-}
-.countdown-label { margin-top: 0.35rem; color: var(--color-muted); font-size: 0.9rem; }
-
-@media (max-width: 640px) {
-  .countdown-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .countdown-value { font-size: 1.6rem; min-width: 56px; }
-}
-
-/* Map + image layout: side-by-side on desktop, stacked on mobile */
-.map-with-image {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  align-items: start;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-.map-with-image .map-frame { width: 100%; }
-.map-with-image .map-photo { width: 100%; border-radius: 8px; overflow: hidden; }
-.map-with-image .map-photo .img-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-@media (min-width: 992px) {
-  .map-with-image {
-    /* photo column slightly wider than map column */
-    grid-template-columns: 1fr 1.3fr; /* photo wider than map */
-    align-items: stretch;
-  }
-  /* let the photo define the row height via aspect-ratio; make iframe fill the same height
-     Ensure both grid items stretch to the same row height and remove any top margin on the photo
-     so they align perfectly. */
-  .map-with-image { align-items: stretch; }
-  .map-with-image .map-photo { aspect-ratio: 4 / 3; margin-top: 0; align-self: stretch; }
-  .map-with-image .map-frame { height: 100%; align-self: stretch; display: block; }
-  .map-with-image .map-frame .map-iframe { width: 100%; height: 100%; border: 0; display: block; }
-  /* add a subtle gold frame around the photo */
-  .map-with-image .map-photo { border: 6px solid var(--color-gold); border-radius: 12px; box-shadow: 0 10px 30px rgba(2,17,13,0.08); overflow: hidden; }
-  .map-with-image .map-photo .img-cover { object-position: center center; }
-}
-
-
-@media (max-width: 768px) {
-  .ratio-16-9 { padding-top: 56.25%; }
-  .ratio-1-1 { padding-top: 100%; }
-}
-
   /* Header menu styles */
-  .menu-button { padding: 0.5rem; border-radius: 0.375rem; border: 1px solid var(--color-gold); color: var(--color-gold); background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); }
-  .menu-panel { position: absolute; left: 0; top: 40px; width: 11rem; background: var(--color-ivory); border: 1px solid var(--color-gold); border-radius: 6px; padding: 0.25rem; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-  .menu-item { display: block; padding: 0.5rem 0.75rem; }
+  .menu-button { padding: 0.5rem; border-radius: 0.375rem; border: 1px solid var(--amarillo); color: var(--amarillo); background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); }
+  .menu-panel { position: absolute; left: 0; top: 40px; width: 11rem; background: var(--naranja-claro); border: 1px solid var(--amarillo); border-radius: 6px; padding: 0.25rem; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .menu-item { display: block; padding: 0.5rem 0.75rem; font-family: 'Belleza', serif; letter-spacing: 0.05em; }
   .menu-item:hover { background: rgba(197,157,95,0.08); }
 
   /* Back to top button */
@@ -208,7 +75,7 @@ button:focus-visible {
     width: 56px;
     height: 56px;
     border-radius: 9999px;
-    background: var(--color-gold);
+    background: var(--amarillo);
     color: white;
     border: none;
     display: flex;
@@ -246,8 +113,8 @@ button:focus-visible {
     top: 0;
     z-index: 65;
     width: 100%;
-    gap: 28px;
-    padding: 14px 24px;
+    gap: 4px;
+    padding: 1px 2px;
     justify-content: center;
     align-items: center;
     background: transparent;
@@ -257,40 +124,186 @@ button:focus-visible {
   .app-main {
     padding-top: var(--header-offset); /* space for stacked header + nav on desktop */
   }
+
+  /* Remove visual gap before the first section (hero) while keeping anchor offsets for others */
+  .app-main > #hero { margin-top: calc(-1 * var(--header-offset)); }
 }
 
 /* Hero title tweaks */
-.hero h1 { text-shadow: 0 6px 18px rgba(0,0,0,0.35); }
-.hero h2 { color: rgba(255,255,255,0.95); }
+.hero h1 { text-shadow: none; }
+.hero h2 { color: rgba(255,255,255,0.95); text-shadow: none; }
+
+/* Stronger hero title and tighter subtitle spacing */
+#hero .hero-title {
+  display: block;
+  margin: 0 auto 0.35rem auto; /* reduce gap to date */
+  max-width: 100%;
+  width: clamp(300px, 60vw, 800px);
+  height: auto;
+  object-fit: contain;
+}
+
+#hero .hero-subtitle {
+  font-family:'Belleza', serif; /* use heading serif for an elegant look */
+  font-size: clamp(0.95rem, 3vw, 2rem);
+  margin: 0 0 0.6rem 0; /* bring subtitle closer to countdown */
+  opacity: 1;
+  letter-spacing: 0.01em;
+  text-align: center;
+  font-weight: 900;
+  color: rgba(255,255,255,1);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* Hero inline countdown (under the date) */
+.hero-countdown {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: end;
+  margin-top: 0.45rem; /* tighten gap between date and countdown */
+}
+.hero-countdown-unit { text-align: center; }
+.hero-countdown-value {
+  font-family: 'Belleza', serif;
+  font-size: 1.2rem;
+  /* translucent but a bit opaque white background so numbers read on the photo */
+  background: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.98);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.38rem 0.65rem;
+  border-radius: 8px;
+  font-weight: 900; /* bold labels */
+  min-width: 56px;
+  color: var(--verde-oliva-oscuro);
+  /* text-shadow: 0 2px 6px rgba(0,0,0,0.5); */
+}
+.hero-countdown-label {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 900; /* bold labels */
+  font-family:'Belleza',  serif; /* use subtitle/heading serif */
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 480px) {
+  .hero-countdown { gap: 0.5rem; margin-top: 0.5rem; }
+  .hero-countdown-value { font-size: 1.05rem; min-width: 44px; padding: 0.32rem 0.5rem; }
+  .hero-countdown-label { font-size: 0.64rem; }
+}
+
+/* Increase hero typography on small screens for better legibility */
+@media (max-width: 640px) {
+  #hero .hero-title {
+    width: clamp(250px, 80vw, 600px);
+    margin-top: 2.5rem;
+  }
+
+  #hero .hero-subtitle {
+    font-size: clamp(1rem, 8vw, 1.2rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-countdown-value {
+    font-size: 1.15rem;
+    min-width: 52px;
+    padding: 0.44rem 0.7rem;
+  }
+
+  .hero-countdown-label {
+    font-size: 0.78rem;
+  }
+
+  /* Move hero image slightly left and lift it (crop bottom) on small screens */
+  #hero {
+    background-position-x: calc(50% - 75px) !important;
+    background-position-y: calc(25% + 50x) !important;
+    background-size: cover !important;
+    height: 100vh !important;
+  }
+}
 
 /* Compact header bar styling */
 .header-bar {
-  padding: 4px 0; /* further reduced vertical padding */
+  padding: 0; /* ultra-compact header height */
   box-shadow: 0 6px 18px rgba(2,17,13,0.04);
+  background: rgba(255,255,255,0.68);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .menu-wrapper { top: 8px; }
 
 .desktop-nav a {
-  color: var(--color-ink);
+  color: var(--verde-oliva-oscuro);
   text-decoration: none;
-  padding: 6px 8px;
+  padding: 2px 4px;
   border-radius: 8px;
   transition: background 180ms, color 180ms, transform 120ms;
   font-weight: 600;
+  font-family: 'Belleza', serif;
 }
 .desktop-nav a:hover {
   background: rgba(197,157,95,0.08);
-  color: var(--color-gold-600);
+  color: var(--amarillo);
   transform: translateY(-1px);
 }
 
 /* Ensure mobile menu button stays visible and well positioned */
 @media (max-width: 991px) {
-  /* Keep the mobile menu button fixed and visible; hide desktop nav on small screens */
+  /* Keep only the floating menu button visible on small screens */
   .menu-wrapper { left: 12px; top: 12px; }
-  .menu-wrapper { position: fixed; z-index: 110; }
-  .menu-wrapper .menu-button { position: fixed; left: 12px; top: 12px; z-index: 120; }
+
+  /* Force the mobile menu to be fixed to the viewport and above everything */
+  .menu-wrapper { position: fixed !important; z-index: 2147483647 !important; }
+
+  /* Slightly smaller button and safe-area aware top position so it's fully visible */
+  .menu-wrapper .menu-button {
+    position: fixed !important;
+    left: 12px;
+    /* keep a small gap from the viewport top even when scrolling */
+    top: calc(env(safe-area-inset-top,10px) + 12px) !important;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+    padding: 0.33rem 0.42rem !important;
+    border-radius: 8px !important;
+    background: rgba(255,255,255,0.92) !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  }
+  .menu-wrapper .menu-button svg { width: 18px !important; height: 18px !important; }
+
+  /* Ensure the dropdown panel appears above full-bleed sections and is not clipped */
+  .menu-panel {
+    position: fixed !important;
+    top: calc(env(safe-area-inset-top,10px) + 56px) !important;
+    left: 12px !important;
+    z-index: 2147483647 !important;
+  }
+
+  /* Fix header to viewport on small screens but visually hide its inner content; keep overflow visible so button isn't clipped */
+  header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2147483647 !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* Hide header inner content on mobile (only show floating button) */
+  .header-inner { display: none !important; }
+
+  /* Remove extra top padding on main since header visual area is hidden */
+  .app-main { padding-top: 0 !important; }
 
   /* Hide the desktop navigation bar on mobile so only the floating button remains */
   .desktop-nav { display: none !important; }
@@ -300,6 +313,7 @@ button:focus-visible {
 .header-inner {
   max-width: 680px;
   margin: 0 auto;
+  padding: 18px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -307,57 +321,368 @@ button:focus-visible {
 }
 
 @media (min-width: 992px) {
-  .desktop-nav { padding: 6px 8px; gap: 12px; }
+  .desktop-nav { padding: 1px 2px; gap: 4px; }
+}
+
+/* Subtle readability overlay across the entire hero */
+.hero { position: relative; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.6));
+  filter: grayscale(0.2) contrast(1.8) brightness(0.2);
 }
 
 /* Smooth scrolling and prevent fixed header from hiding anchors */
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: calc(var(--header-offset) + 8px); }
 
-/* Carousel styles for Gallery (fade/scale with touch support) */
-.carousel { position: relative; background: #fff; box-sizing: border-box; }
-
-/* Peek carousel: slides absolutely positioned so neighbors show behind center. Keep contained in its parent. */
-.carousel.peek { overflow: hidden; }
-.carousel-peek-slide {
-  position: absolute;
-  top: 50%;
-  transform-origin: center center;
-  transition: transform 360ms cubic-bezier(.22,.9,.32,1), opacity 300ms;
-  border-radius: 8px;
-  box-shadow: 0 12px 28px rgba(2,17,13,0.08);
+/* Intro section below hero: elegant, centered paragraph on a light background */
+.intro-section {
+  background-image: url('/images/fondo_flores2.jpg');
+  background-size: contain; /* Ajuste para ver imagen completa sin deformar */
+  background-repeat: repeat;
+  background-position: center;
+  background-color: var(--color-background); /* Relleno para espacios vacíos */
+  color: var(--verde-oliva-oscuro);
+  padding: 1.5rem 1rem 1rem 1rem; /* más compacta según petición */
 }
-.carousel-peek-slide .img-cover { border-radius: 8px; }
+.intro-section .intro-text {
+  max-width: 900px; /* Aumentado para ocupar más espacio */
+  margin: 0 auto; /* Centrado para equilibrar los huecos */
+  font-family: 'Belleza', serif;
+  font-size: clamp(1.125rem, 4vw, 1.5rem); /* Corregido orden: min, pref, max */
+  line-height: 1.6;
+  color: var(--verde-oliva-oscuro);
+  opacity: 1;
+  text-align: center; /* Default fallback */
+  font-weight: 500;
+  text-justify: auto
+}
 
-.carousel-prev, .carousel-next {
+.intro-text p { margin-bottom: 1rem; }
+.intro-text-left { 
+  text-align: left; 
+  max-width: 80%; /* Fuerza salto de línea */
+  margin-bottom: 5rem; /* Más espacio entre párrafos */
+}
+.intro-text-right { 
+  margin-top: 5rem;
+  text-align: right; 
+  max-width: 80%; 
+  margin-left: auto; /* Alinea el bloque a la derecha */
+}
+.intro-text-center-small { 
+  text-align: center; 
+  font-size: 0.85em; /* Slightly smaller than base intro size */
+  margin-top: 5rem;
+  color: var(--color-muted);
+}
+
+.intro-ornament {
+  display: block;
+  margin: 3rem auto 3rem auto;
+  width: 160px;
+  max-width: 50%;
+  opacity: 0.98;
+}
+
+@media (max-width: 640px) {
+  .intro-section { padding: 2.25rem 1rem; }
+  .intro-section .intro-text { font-size: 1.2rem; }
+}
+
+/* Location section styles */
+
+.location-section { background: white; color: var(--verde-oliva-oscuro); padding: 2rem;}
+/* Layout Desktop: Texto Izquierda - Imagen Derecha (Grande) */
+.location-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1.4fr; /* Texto izquierda (menor), Imagen derecha (mayor) */
+  gap: 4rem; 
+  align-items: start; /* Alineado arriba */
+  padding: 0 1rem; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+.location-content {
+  padding-right: 1rem;
+}
+
+.location-title { font-family: var(--font-heading), serif; font-size: 3rem; margin: 0 0 3rem 0; letter-spacing: 0.08rem; color: var(--verde-oliva-oscuro)}
+.location-text { font-family: 'Belleza', serif; text-justify: auto; margin: 0 0 2rem 0; font-size: 1.3rem; line-height: 1.6; text-align: left; color: var(--verde-oliva-oscuro);}
+
+/* Location callout - image container */
+.location-aside { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  /* order eliminado para que salga a la derecha (orden natural) */
+}
+
+.location-callout { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; width: 100%; }
+
+/* Estilo para la imagen de ubicación */
+.location-callout a {
+  display: block;
+  width: 100%; /* Ocupa todo el ancho de su columna */
+  max-width: none;
+  height: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: none; /* Sin sombra */
+  transition: transform 0.2s ease;
+}
+.location-callout a:hover { transform: translateY(-2px); }
+.location-callout img { width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 4/3; }
+
+.callout-arrow { position: relative; display: block; margin-top: 0.25rem; }
+.map-cta { display: inline-block; margin-top: 0.35rem; background: rgba(255,255,255,0.98); color: var(--color-ink); border-radius: 999px; padding: 0.45rem 1rem; font-family: var(--font-heading); text-decoration: none; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.map-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.09); }
+
+/* Responsive: Texto arriba, Imagen abajo */
+@media (max-width: 900px) {
+  .location-grid { 
+    grid-template-columns: 1fr; /* Una columna */
+    gap: 2rem;
+  }
+  
+  .location-aside { 
+    order: 0; /* Restaurar orden natural (después del texto) */
+    margin-top: 1rem; 
+    justify-content: center; 
+  }
+  
+  .location-content { padding-right: 0; }
+  
+  .location-callout a { 
+    width: 100%; 
+    max-width: 500px; /* Límite razonable en móvil */
+  }
+}
+
+.location-map { border-radius: 8px; overflow: hidden; }
+
+
+
+/* Alojamiento (accommodation) grid and cards */
+.accom-section {
+  padding: 2rem 0;
+  background-image: url('/images/fondo_flores4.png');
+  background-size: contain;
+  background-repeat: repeat;
+  background-position: center;
+  z-index: 0;
+}
+.accom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  align-items: start;
+  padding: 0 0.5rem 1.5rem;
+}
+.accom-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(2,17,13,0.06);
+  display: flex;
+  flex-direction: column;
+}
+.accom-photo img { width: 100%; height: 160px; object-fit: cover; display: block; }
+.accom-body { padding: 0.9rem 1rem 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.accom-title { margin: 0; font-family: var(--font-heading); font-size: 1.15rem; color: var(--verde-oliva-oscuro); }
+.accom-links { margin-top: auto; display: flex; gap: 0.5rem; align-items: center; }
+.accom-site { color: var(--verde-oliva-oscuro); text-decoration: none; font-weight: 600; }
+.accom-map-btn { margin-left: auto; background: var(--amarillo); color: white; border-radius: 999px; padding: 0.4rem 0.75rem; text-decoration: none; font-weight: 700; }
+.accom-map-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+@media (max-width: 600px) {
+  .accom-photo img { height: 200px; }
+  .accom-grid { padding: 0 0.75rem; gap: 1rem; }
+}
+
+/* Photo strip full-width gallery (4 across -> 2x2 -> 1x1) */
+.photo-strip { padding: 0; margin: 1.25rem 0; }
+.photo-strip-full {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  overflow: hidden;
+}
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.photo-card img { width: 100%; height: 320px; object-fit: cover; display: block; }
+
+@media (max-width: 1100px) {
+  .photo-grid { grid-template-columns: repeat(2, 1fr); }
+  .photo-card img { height: 260px; }
+}
+
+@media (max-width: 600px) {
+  .photo-grid { grid-template-columns: 1fr; }
+  .photo-card img { height: 200px; }
+}
+/* Assist (RSVP) card over background */
+.assist-section { position: relative; padding: 3.5rem 0; }
+.assist-bg {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--color-ivory);
-  color: var(--color-gold-600);
-  border: 1px solid rgba(197,157,95,0.18);
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/fondo5.png');
+  background-size: contain;
+  background-position: center;
+  filter: brightness(1.01) contrast(1.05);
+  background-repeat: repeat;
+  z-index: 0;
+}
+.assist-container { position: relative; z-index: 2; max-width: 920px; margin: 0 auto; padding: 2rem 1rem; }
+.assist-card { background: rgba(255,255,255,0.98); padding: 2.25rem; border-radius: 6px; box-shadow: 0 18px 44px rgba(0,0,0,0.12); max-width: 680px; margin: 0 auto; }
+.assist-deco { text-align: center; font-size: 1.1rem; color: var(--color-muted); margin-bottom: 0.25rem; }
+.assist-title { font-family: var(--font-heading); text-align: center; font-size: 2.25rem; margin: 0 0 1rem 0; }
+.assist-form label { display: block; font-size: 0.85rem; color: var(--color-muted); margin-bottom: 0.5rem; }
+.assist-form input,
+.assist-form select,
+.assist-form textarea { width: 100%; padding: 0.6rem 0.75rem; border: none; border-bottom: 1px solid #e6e6e6; background: transparent; border-radius: 0; font-family: var(--font-body); margin-bottom: 1rem; }
+.assist-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.assist-actions { display: flex; justify-content: flex-end; gap: 0.75rem; align-items: center; margin-top: 0.75rem; }
+.assist-calendar { background: transparent; color: var(--verde-oliva-oscuro); border: 1px solid #e6e6e6; padding: 0.45rem 0.9rem; border-radius: 6px; font-weight: 600; }
+.assist-calendar:hover { background: rgba(0,0,0,0.03); }
+.assist-submit { background: var(--amarillo); color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 700; }
+
+@media (max-width: 880px) {
+  .assist-row { grid-template-columns: 1fr; }
+  .assist-card { padding: 1.25rem; }
+  .assist-container { padding: 1rem; }
+}
+
+/* Lista de boda: Split layout */
+.lista-section {
+  background-color: white;
+  width: 100%;
+  overflow: hidden;
+}
+
+.lista-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 900px) {
+  .lista-grid {
+    flex-direction: row;
+    align-items: stretch; /* Estirar altura para que coincidan */
+    min-height: 450px; /* Altura más contenida (reducido de 600px) */
+  }
+}
+
+.lista-content {
+  flex: 1.2; /* Más espacio para texto */
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 320;
-  box-shadow: 0 8px 20px rgba(2,17,13,0.08);
-  font-weight: 700;
-  font-size: 20px;
-}
-.carousel-prev { left: 8px; }
-.carousel-next { right: 8px; }
-.carousel-prev:hover, .carousel-next:hover { background: linear-gradient(180deg, rgba(255,255,255,0.98), var(--color-ivory)); transform: translateY(-50%) scale(1.03); }
-
-.carousel-indicators { display: flex; gap: 8px; justify-content: center; padding: 12px 0; }
-.carousel-indicators .indicator { width: 10px; height: 10px; border-radius: 999px; background: rgba(0,0,0,0.12); border: none; cursor: pointer; }
-.carousel-indicators .indicator.active { background: var(--color-gold); box-shadow: 0 4px 12px rgba(197,157,95,0.18); }
-
-@media (max-width: 768px) {
-  .carousel-prev, .carousel-next { width: 40px; height: 40px; }
-  .carousel-indicators { padding: 8px 0; }
+  padding: 4rem 3rem; /* Más padding horizontal */
+  background: white;
+  color: var(--verde-oliva-oscuro);
 }
 
+.lista-content-inner {
+  max-width: 520px;
+  text-align: left;
+}
+
+.lista-description {
+  font-family: 'Belleza', serif;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.lista-iban {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--verde-oliva-oscuro);
+  letter-spacing: 0.05em;
+  margin: 0;
+  border-top: 1px solid var(--naranja-apagado);
+  padding-top: 1rem;
+  display: inline-block;
+}
+
+.lista-image-col {
+  flex: 1; /* Imagen menos dominante */
+  position: relative;
+  min-height: 300px;
+}
+
+.lista-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Timetable Section */
+.timetable-section {
+  background-color: var(--color-background); /* Mismo fondo que intro */
+  padding: 1rem 0;
+  color: var(--verde-oliva-oscuro);
+}
+
+.timetable-title {
+  font-family: var(--font-heading), serif;
+  font-size: 3rem; 
+  margin: 0 0 3rem 0; 
+  letter-spacing: 0.08rem; 
+  color: var(--verde-oliva-oscuro);
+  text-align: center; /* Centrado por defecto */
+}
+
+/* Alineación izquierda consistente con Location si se desea, o mantener centrado */
+.timetable-section .container {
+  text-align: center;
+}
+
+.timetable-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timetable-img {
+  max-width: 100%;
+  height: auto;
+  width: 1000px;
+  display: block;
+}
+
+.timetable-desktop {
+  display: block;
+}
+
+.timetable-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .timetable-desktop {
+    display: none;
+  }
+  .timetable-mobile {
+    display: block;
+    width: 600px; /* Ajuste para móvil vertical */
+    margin: 0 auto;
+  }
+}
