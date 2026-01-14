@@ -17,7 +17,7 @@ export default function Location() {
           <aside className="location-aside">
             <div className="location-callout">
               <a href="https://www.google.com/maps/search/?api=1&query=Cigarral+del+Ángel+Toledo" target="_blank" rel="noopener noreferrer" aria-label="Ver ubicación en Google Maps">
-                <img src="/images/ubicacion.png" alt="Vista del Cigarral" />
+                <img src="/images/photos/ubicacion.png" alt="Vista del Cigarral" />
               </a>
             </div>
           </aside>

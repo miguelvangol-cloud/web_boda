@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 
 // Hero with a simple, elegant countdown under the date
 export default function Hero() {
-  const bg = '/images/hero_toledo.jpg';
-  const fallback = '/images/hero-placeholder.svg';
+  const bg = '/images/photos/hero_toledo.jpg';
   const styleBg = {
-    backgroundImage: `url(${bg}), url(${fallback})`,
+    backgroundImage: `url(${bg})`,
     backgroundPosition: '50% 25%',
     backgroundSize: 'cover'
   };
@@ -32,7 +31,7 @@ export default function Hero() {
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-white/90 to-transparent z-0 pointer-events-none" />
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center text-white pb-24 md:pb-32 z-10">
           <div className="container">
-            <img src="/images/titulo_hero.png" alt="Celia &amp; Miguel" className="hero-title" />
+            <img src="/images/photos/titulo_hero.png" alt="Celia &amp; Miguel" className="hero-title" />
             <h2 className="hero-subtitle text-white/90">Toledo - 19 de septiembre de 2026</h2>
 
             <div className="hero-countdown" aria-live="polite" aria-label="Cuenta atrás hasta el 19 de septiembre de 2026">
@@ -61,11 +60,11 @@ export default function Hero() {
       <section id="intro" className="intro-section">
         <div className="container intro-grid">
             <div className="intro-text">
-              {/* <img src="/images/ornament.png" className="intro-ornament intro-ornament-top" alt="" aria-hidden="true" /> */}
-              <p className="intro-text-left">"Hace ya más de 8 años tuvimos la suerte de que nuestros caminos se cruzaran. Después de todo este tiempo, sentimos que ha llegado el momento de celebrar juntos.</p>
-              <p className="intro-text-right">Queremos que nuestro día sea especial e inolvidable y para ello os necesitamos, ya que sois parte fundamental de nuestras vidas."</p>
+              {/* <img src="/images/photos/ornament.png" className="intro-ornament intro-ornament-top" alt="" aria-hidden="true" /> */}
+              <p className="intro-text-left">"Hace ya más de 8 años tuvimos la suerte de que nuestros caminos se cruzaran. Después de todo este tiempo, sentimos que ha llegado el momento de celebrarlo juntos."</p>
+              <p className="intro-text-right">"Queremos que nuestro día sea especial e inolvidable y para ello os necesitamos, ya que sois parte fundamental de nuestras vidas."</p>
               <p className="intro-text-center-small">En esta página encontraréis toda la información necesaria; aun asi, no dudéis en preguntarnos cualquier cosa que necesitéis.</p>
-              {/* <img src="/images/ornament.png" className="intro-ornament intro-ornament-bottom" alt="" aria-hidden="true" /> */}
+              {/* <img src="/images/photos/ornament.png" className="intro-ornament intro-ornament-bottom" alt="" aria-hidden="true" /> */}
             </div>
         </div>
       </section>

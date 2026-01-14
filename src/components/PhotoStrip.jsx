@@ -1,10 +1,10 @@
 import React from 'react';
 
 const images = [
-  '/images/strip1.jpg',
-  '/images/strip2.jpg',
-  '/images/strip3.jpg',
-  '/images/strip4.jpg'
+  '/images/photos/strip1.jpg',
+  '/images/photos/strip2.jpg',
+  '/images/photos/strip3.jpg',
+  '/images/photos/strip4.jpg'
 ];
 
 export default function PhotoStrip() {

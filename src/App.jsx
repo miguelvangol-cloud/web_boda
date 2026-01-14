@@ -17,8 +17,8 @@ export default function App() {
         <Hero />
         <Location />
         <Timetable />
-        <Alojamiento />
         <Assist />
+        <Alojamiento />
         {/* <PhotoStrip /> */}
         <ListaBoda />
       </main>
