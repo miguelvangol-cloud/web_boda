@@ -1,9 +1,16 @@
 export default function Footer({ className = '' }) {
   return (
-    <footer className={`relative py-6 text-center text-muted bg-ivory border-t border-gold overflow-hidden ${className}`} role="contentinfo">
-      <div className="relative container">
-        <p>Con amor, Celia &amp; Miguel <span aria-hidden="true">❤️</span></p>
-        <p className="text-sm">&copy; 2026 Nuestra Boda</p>
+    <footer className="footer-section" role="contentinfo">
+      <div className="footer-container">
+        <div className="footer-row">
+          <img src="/images/photos/horcajo.png" alt="Horcajo" className="footer-ornament-img" />
+          <div className="footer-center">
+            <img src="/images/photos/logo_cm.png" alt="Logo Celia y Miguel" className="footer-logo" />
+            <p className="footer-text">19.09.2026</p>
+          </div>
+          <img src="/images/photos/illescas.png" alt="Illescas" className="footer-ornament-img" />
+        </div>
+        <p className="footer-copyright">&copy; 2026 Nuestra Boda</p>
       </div>
     </footer>
   );

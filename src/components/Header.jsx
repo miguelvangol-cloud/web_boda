@@ -41,25 +41,34 @@ export default function Header() {
             <a className="menu-item" href="#ubicacion" onClick={() => setOpen(false)}>
               Ubicación
             </a>
+            <a className="menu-item" href="#horarios" onClick={() => setOpen(false)}>
+              Horarios
+            </a>
             <a className="menu-item" href="#asistencia" onClick={() => setOpen(false)}>
               Asistencia
             </a>
             <a className="menu-item" href="#alojamiento" onClick={() => setOpen(false)}>
               Alojamiento
             </a>
+            <a className="menu-item" href="#lista-boda" onClick={() => setOpen(false)}>
+              Lista de Boda
+            </a>
           </nav>
         )}
       </div>
 
       <div className="container header-inner">
-        {/* Header left intentionally compact: title moved to hero */}
-        <div style={{height: '0px'}} aria-hidden></div>
+        <a href="#hero" className="header-logo" aria-label="Ir al inicio">
+          <img src="/images/photos/logo_cm_icon.svg" alt="Logo Celia y Miguel" />
+        </a>
         {/* Desktop horizontal navigation (visible on wide screens) */}
         <nav className="desktop-nav" aria-label="Menú principal">
           <a href="#hero">Inicio</a>
           <a href="#ubicacion">Ubicación</a>
+          <a href="#horarios">Horarios</a>
           <a href="#asistencia">Asistencia</a>
           <a href="#alojamiento">Alojamiento</a>
+          <a href="#lista-boda">Lista de Boda</a>
         </nav>
       </div>
     </header>
