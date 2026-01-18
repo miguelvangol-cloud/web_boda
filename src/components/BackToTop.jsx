@@ -24,10 +24,9 @@ export default function BackToTop() {
       onClick={handleClick}
       aria-label="Volver arriba"
     >
-      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
         <title>Subir</title>
-        {/* Stroked chevron up for high contrast */}
-  <path d="M18 14 L12 8 L6 14" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <path d="M12 5 L12 19 M12 5 L7 10 M12 5 L17 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
       </svg>
     </button>
   );
