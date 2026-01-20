@@ -45,7 +45,7 @@ export default function Alojamiento() {
               <h4 className="accom-title">{h.title}</h4>
               {h.text && <p className="accom-text">{h.text}</p>}
               <div className="accom-links">
-                <a className="accom-site" href={h.website} target="_blank" rel="noopener noreferrer">Visitar web</a>
+                <a className="accom-site external-link-hint" href={h.website} target="_blank" rel="noopener noreferrer">Visitar web</a>
                 <a className="accom-map-btn" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.mapsQuery)}`} target="_blank" rel="noopener noreferrer">Ver en maps</a>
               </div>
             </div>

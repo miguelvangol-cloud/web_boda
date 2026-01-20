@@ -62,7 +62,7 @@ export default function Hero() {
           <div className="container intro-grid">
               <div className="intro-text">
                 {/* <img src="/images/photos/ornament.png" className="intro-ornament intro-ornament-top" alt="" aria-hidden="true" /> */}
-                <p className="intro-text-left">"Hace ya más de 8 años tuvimos la suerte de que nuestros caminos se cruzaran. Después de todo este tiempo, sentimos que ha llegado el momento de celebrarlo juntos."</p>
+                <p className="intro-text-left"><span className="drop-cap">"H</span>ace ya más de 8 años tuvimos la suerte de que nuestros caminos se cruzaran. Después de todo este tiempo, sentimos que ha llegado el momento de celebrarlo juntos."</p>
                 <p className="intro-text-right">"Queremos que nuestro día sea especial e inolvidable y para ello os necesitamos, ya que sois parte fundamental de nuestras vidas."</p>
                 <p className="intro-text-center-small">En esta página encontraréis toda la información necesaria; aun asi, no dudéis en preguntarnos cualquier cosa que necesitéis.</p>
                 {/* <img src="/images/photos/ornament.png" className="intro-ornament intro-ornament-bottom" alt="" aria-hidden="true" /> */}

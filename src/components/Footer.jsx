@@ -10,7 +10,7 @@ export default function Footer({ className = '' }) {
           </div>
           <img src="/images/photos/illescas.png" alt="Illescas" className="footer-ornament-img" />
         </div>
-        <p className="footer-copyright">&copy; 2026 Nuestra Boda</p>
+        <p className="footer-copyright">&copy; Celia&Miguel</p>
       </div>
     </footer>
   );
