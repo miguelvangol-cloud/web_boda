@@ -39,7 +39,7 @@ export default function Alojamiento() {
         {hotels.map((h) => (
           <article key={h.id} className="accom-card">
             <div className="accom-photo">
-              <img src={h.image} alt={h.title} />
+              <img src={h.image} alt={h.title} loading="lazy" decoding="async" />
             </div>
             <div className="accom-body">
               <h4 className="accom-title">{h.title}</h4>

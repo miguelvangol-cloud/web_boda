@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-white/90 to-transparent z-0 pointer-events-none" />
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center text-white pb-24 md:pb-32 z-10">
           <div className="container">
-            <img src="/images/photos/titulo_hero.png" alt="Celia &amp; Miguel" className="hero-title" />
+            <img src="/images/photos/titulo_hero.png" alt="Celia &amp; Miguel" className="hero-title" loading="eager" fetchpriority="high" />
             <h2 className="hero-subtitle text-white/90">Toledo - 19 de septiembre de 2026</h2>
 
             <div className="hero-countdown" aria-live="polite" aria-label="Cuenta atrás hasta el 19 de septiembre de 2026">

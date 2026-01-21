@@ -49,7 +49,7 @@ body {
   min-height: 100vh;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
-section[id] { scroll-margin-top: 80px; }
+section[id] { scroll-margin-top: -60px; }
 
 @media (max-width: 991px) {
   section[id] { scroll-margin-top: -60px; }
@@ -947,11 +947,11 @@ section[id] { scroll-margin-top: 80px; }
   opacity: 0.6;
 }
 
-/* Improved Scroll Padding */
+/* Improved Scroll Padding - Increased for desktop to land lower */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 130px; /* Increased from 80px to stop lower */
 }
 @media (max-width: 991px) {
-  html { scroll-padding-top: 20px; }
+  html { scroll-padding-top: 60px; } /* Improved mobile landing position */
 }
