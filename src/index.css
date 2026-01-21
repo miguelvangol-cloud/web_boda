@@ -676,7 +676,13 @@ section[id] { scroll-margin-top: -60px; }
   gap: 2.5rem;
   align-items: stretch; /* Both columns will have the same height */
 }
-.lista-image-col { width: 100%; position: relative; }
+.lista-image-col { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-end; 
+  width: 100%; 
+  position: relative; 
+}
 .lista-img {
   width: 100%;
   height: auto;
@@ -705,7 +711,7 @@ section[id] { scroll-margin-top: -60px; }
   font-family: 'Belleza', serif;
   font-size: 1.25rem;
   line-height: 1.7;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   color: var(--verde-oliva-oscuro);
   text-align: center;
 }
@@ -716,6 +722,7 @@ section[id] { scroll-margin-top: -60px; }
   border-top: 1px solid var(--amarillo);
   padding-top: 1.5rem;
   align-items: center;
+  margin-bottom: 1rem;
 }
 .lista-iban-label {
   font-family: 'Belleza', serif;
@@ -800,9 +807,20 @@ section[id] { scroll-margin-top: -60px; }
 }
 .lista-ornament {
   width: 200px;
+  max-width: 100%;
   height: auto;
-  margin: auto auto 0 auto; /* Centered horizontally, pushes to the bottom of the content column */
+  margin: 3rem auto 0 auto; /* Pushes to bottom if flex container has space */
   opacity: 0.5;
+  display: block;
+}
+
+/* Ensure the ornament is truly at the bottom when stretched */
+.lista-content {
+  flex: 1;
+}
+
+.lista-ornament {
+  margin-top: auto; 
 }
 
 /* === TITLE DESIGN === */
@@ -850,6 +868,10 @@ section[id] { scroll-margin-top: -60px; }
   .lista-title { text-align: center; font-size: 2.5rem; }
   .lista-description { text-align: center; }
   .lista-iban-container { align-items: center; border-left: none; border-top: 1px solid var(--amarillo); padding-left: 0; padding-top: 1.5rem; }
+  .lista-iban { font-size: 1.3rem; } /* Reduce slightly on mobile */
+  @media (max-width: 400px) {
+    .lista-iban { font-size: 1.1rem; } /* Reduce further on very small phones */
+  }
   .lista-img { margin: 0 auto; } /* Center on mobile */
   .lista-image-col { order: 0; } /* Photo first on mobile */
   .lista-content { order: 1; }
