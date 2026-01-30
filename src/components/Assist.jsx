@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Assist() {
   return (
@@ -10,10 +10,10 @@ export default function Assist() {
             <img src="/images/photos/foto_nosotros.JPG" alt="Celia y Miguel" className="assist-photo" />
           </div>
           <div className="assist-text-col">
-            <h2 id="assist-title" className="assist-title-large">¿Nos acompañarás en nuestro día?</h2>
-            <a href="https://forms.gle/tu_formulario_aqui" target="_blank" rel="noopener noreferrer" className="assist-form-btn-link">
+            <h2 id="assist-title" className="assist-title-large" style={{ viewTransitionName: 'assist-title' }}>¿Nos acompañarás en nuestro día?</h2>
+            <Link viewTransition to="/confirmar-asistencia" className="assist-form-btn-link">
               <img src="/images/photos/rellenar_formulario.png" alt="Rellenar formulario" className="assist-form-btn-img" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
