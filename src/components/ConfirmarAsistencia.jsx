@@ -7,16 +7,30 @@ export default function ConfirmarAsistencia() {
     accompaniment: null, // 'yes', 'no'
     names: '', // User's name
     companionName: '', // Companion's name
-    allergies: '',
-    comments: ''
+    bus: null, // 'yes', 'no'
+    allergies: ''
   });
 
   const [visibleSteps, setVisibleSteps] = useState(['attendance']);
   const [activeEffect, setActiveEffect] = useState(null); // 'sad' or 'fireworks'
   const [fireworks, setFireworks] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const bottomRef = useRef(null);
 
   // Scroll to the latest step when it appears
+  useEffect(() => {
+    // Reset state on mount to ensure fresh start
+    setFormData({
+      attendance: null,
+      accompaniment: null,
+      names: '',
+      companionName: '',
+      bus: null,
+      allergies: ''
+    });
+    setVisibleSteps(['attendance']);
+  }, []);
+
   useEffect(() => {
     if (visibleSteps.length > 0) {
       const latestStep = visibleSteps[visibleSteps.length - 1];
@@ -71,33 +85,108 @@ export default function ConfirmarAsistencia() {
     if (formData.names.trim()) {
       if (formData.accompaniment === 'yes' && !visibleSteps.includes('companionName')) {
         setVisibleSteps(prev => [...prev, 'companionName']);
-      } else if (formData.accompaniment === 'no' && !visibleSteps.includes('allergies')) {
-        setVisibleSteps(prev => [...prev, 'allergies']);
+      } else if (formData.accompaniment === 'no' && !visibleSteps.includes('bus')) {
+        setVisibleSteps(prev => [...prev, 'bus']);
       }
     }
   };
 
   const handleCompanionNameSubmit = (e) => {
     e.preventDefault();
-    if (formData.companionName.trim() && !visibleSteps.includes('allergies')) {
-      setVisibleSteps(prev => [...prev, 'allergies']);
+    if (formData.companionName.trim() && !visibleSteps.includes('bus')) {
+      setVisibleSteps(prev => [...prev, 'bus']);
     }
   };
 
-  const handleAllergiesSubmit = (e) => {
-    e.preventDefault();
-    if (!visibleSteps.includes('submit')) {
-      setVisibleSteps(prev => [...prev, 'submit']);
-      // Delay fireworks until the final card animation is mostly done
-      setTimeout(() => triggerEffect('fireworks'), 130);
+  const handleBusChoice = (choice) => {
+    setFormData(prev => ({ ...prev, bus: choice }));
+    if (!visibleSteps.includes('allergies')) {
+      setTimeout(() => setVisibleSteps(prev => [...prev, 'allergies']), 300);
     }
+  };
+
+  const handleAllergiesSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!visibleSteps.includes('submit')) {
+      setIsSubmitting(true);
+      const startTime = Date.now();
+      
+      try {
+        // Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBwfdbbnp16NvL6FJcq3uYqZXxUxFN4IaVkfRQBl0pEt9inCJGcBLZrmSbUG3f0g/exec';
+        
+        // Send data to Google Sheets
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        console.log('Form data sent to Google Sheets');
+      } catch (error) {
+        console.error('Error sending to Google Sheets:', error);
+      } finally {
+        // Ensure spinner is visible for at least 800ms for better UX
+        const duration = Date.now() - startTime;
+        const minDuration = 800;
+        if (duration < minDuration) {
+          await new Promise(resolve => setTimeout(resolve, minDuration - duration));
+        }
+        setIsSubmitting(false);
+        // Show success message ONLY after finishing loading
+        setVisibleSteps(prev => [...prev, 'submit']);
+      }
+      
+      // Delay fireworks to allow success message to render smoothly first
+      setTimeout(() => triggerEffect('fireworks'), 200);
+    }
+  };
+
+  const handleSaveTheDate = () => {
+    const event = {
+      title: "Boda Celia y Miguel",
+      description: "¡Nos vamos de fiesta! Celebración de la boda de Celia y Miguel.",
+      location: "Cigarral del Ángel, Toledo",
+      startTime: "20260919T133000",
+      endTime: "20260920T040000"
+    };
+
+    const icsContent = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Boda Celia y Miguel//NONSGML v1.0//EN
+BEGIN:VEVENT
+DTSTART:${event.startTime}
+DTEND:${event.endTime}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+BEGIN:VALARM
+TRIGGER:-PT1440M
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio Boda Celia y Miguel
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.setAttribute('download', 'Boda_Celia_y_Miguel.ics');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
     <section className="confirm-section pt-12 pb-40 min-h-screen">
       <div className="container max-w-4xl mx-auto px-4">
         <header className="form-header-elegant text-center">
-          <h2 className="assist-title-large" style={{ viewTransitionName: 'assist-title' }}>
+          <h2 className="assist-title-large">
             ¿Nos acompañarás en nuestro día?
           </h2>
         </header>
@@ -120,7 +209,7 @@ export default function ConfirmarAsistencia() {
                   onClick={() => { 
                     setFormData({ 
                       attendance: null, accompaniment: null, names: '', companionName: '', 
-                      allergies: '', comments: '' 
+                      bus: null, allergies: '', comments: '' 
                     }); 
                     setVisibleSteps(['attendance']); 
                   }} 
@@ -135,13 +224,15 @@ export default function ConfirmarAsistencia() {
           {/* FAREWELL NO */}
           {visibleSteps.includes('farewell-no') && (
             <div id="step-farewell-no" className="form-step-block is-final-step fade-in">
-              <div className="form-final-block">
-                <p className="final-title-elegant">
-                  Lo sentimos mucho
-                </p>
-                <p className="final-text-elegant">
-                  Te vamos a echar de menos.
-                </p>
+              <div className="final-message-centered-wrapper">
+                <div className="final-message-box">
+                  <p className="final-title-elegant">
+                    Lo sentimos mucho
+                  </p>
+                  <p className="final-text-elegant">
+                    Te vamos a echar de menos.
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -165,7 +256,7 @@ export default function ConfirmarAsistencia() {
                   </span>
                   <button 
                     onClick={() => { 
-                      setFormData(prev => ({ ...prev, accompaniment: null, names: '', companionName: '', allergies: '' })); 
+                      setFormData(prev => ({ ...prev, accompaniment: null, names: '', companionName: '', bus: null, allergies: '' })); 
                       setVisibleSteps(['attendance', 'accompaniment']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
@@ -183,12 +274,12 @@ export default function ConfirmarAsistencia() {
               <label className="form-label-elegant">
                 Dinos tu nombre completo
               </label>
-              {(formData.accompaniment === 'yes' ? visibleSteps.includes('companionName') : visibleSteps.includes('allergies')) ? (
+              {(formData.accompaniment === 'yes' ? visibleSteps.includes('companionName') : visibleSteps.includes('bus')) ? (
                 <div className="form-answer-display text-center">
                   <span className="form-answer-value">{formData.names}</span>
                   <button 
                     onClick={() => { 
-                      setFormData(prev => ({ ...prev, names: '', companionName: '', allergies: '' })); 
+                      setFormData(prev => ({ ...prev, names: '', companionName: '', bus: null, allergies: '' })); 
                       setVisibleSteps(['attendance', 'accompaniment', 'names']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
@@ -222,12 +313,12 @@ export default function ConfirmarAsistencia() {
               <label className="form-label-elegant">
                 ¿Cuál es el nombre de tu acompañante?
               </label>
-              {visibleSteps.includes('allergies') ? (
+              {visibleSteps.includes('bus') ? (
                 <div className="form-answer-display text-center">
                   <span className="form-answer-value">{formData.companionName}</span>
                   <button 
                     onClick={() => { 
-                      setFormData(prev => ({ ...prev, companionName: '', allergies: '' })); 
+                      setFormData(prev => ({ ...prev, companionName: '', bus: null, allergies: '' })); 
                       setVisibleSteps(['attendance', 'accompaniment', 'names', 'companionName']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
@@ -255,7 +346,43 @@ export default function ConfirmarAsistencia() {
             </div>
           )}
 
-          {/* STEP 5: Allergies (Formerly Step 6) */}
+          {/* STEP 5: Bus (New Step) */}
+          {visibleSteps.includes('bus') && (
+            <div id="step-bus" className="form-step-block fade-in">
+              <label className="form-label-elegant text-2xl font-heading text-verde-oliva-oscuro block text-center mb-6">
+                ¿Te apuntas al bus que saldrá desde Illescas?
+              </label>
+              
+              {formData.bus === null ? (
+                <div className="flex flex-col sm:flex-row gap-6 justify-center max-w-md mx-auto">
+                  <button onClick={() => handleBusChoice('yes')} className="btn-elegant-choice primary">Sí, ¡me apunto!</button>
+                  <button onClick={() => handleBusChoice('no')} className="btn-elegant-choice outline">No, iré por mi cuenta</button>
+                </div>
+              ) : (
+                <div className="form-answer-display text-center">
+                  <span className="form-answer-value">
+                    {formData.bus === 'yes' ? 'Sí, ¡me apunto!' : 'No, iré por mi cuenta'}
+                  </span>
+                  <button 
+                    onClick={() => { 
+                      setFormData(prev => ({ ...prev, bus: null, allergies: '' })); 
+                      setVisibleSteps(prev => {
+                        const baseSteps = ['attendance', 'accompaniment', 'names'];
+                        if (formData.accompaniment === 'yes') baseSteps.push('companionName');
+                        baseSteps.push('bus');
+                        return baseSteps;
+                      });
+                    }} 
+                    className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
+                  >
+                    Cambiar
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* STEP 6: Allergies (Formerly Step 5) */}
           {visibleSteps.includes('allergies') && (
             <div id="step-allergies" className="form-step-block fade-in">
               <label className="form-label-elegant">
@@ -270,7 +397,7 @@ export default function ConfirmarAsistencia() {
                   </span>
                   <button 
                     onClick={() => { 
-                      setVisibleSteps(['attendance', 'accompaniment', 'names', 'companionName', 'allergies']); 
+                      setVisibleSteps(['attendance', 'accompaniment', 'names', 'companionName', 'bus', 'allergies']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
                   >
@@ -284,8 +411,22 @@ export default function ConfirmarAsistencia() {
                     onChange={(e) => setFormData(prev => ({ ...prev, allergies: e.target.value }))}
                     className="form-input-elegant w-full min-h-[300px] py-6 px-4 text-xl leading-relaxed"
                     placeholder="Ej: Celíaco, alérgico a los frutos secos, vegano..."
+                    disabled={isSubmitting}
                   />
-                  <button type="submit" className="btn-elegant-submit mt-10">Confirmar Asistencia</button>
+                  <button 
+                    type="submit" 
+                    className={`btn-elegant-submit mt-10 ${isSubmitting ? 'is-loading' : ''}`}
+                    disabled={isSubmitting}
+                  >
+                    {!isSubmitting ? (
+                      'Confirmar Asistencia'
+                    ) : (
+                      <div className="flex items-center justify-center gap-6">
+                        <div className="spinner-squad"></div>
+                        <span className="uppercase tracking-[0.2em] opacity-90 text-[0.95rem]">Enviando...</span>
+                      </div>
+                    )}
+                  </button>
                 </form>
               )}
             </div>
@@ -294,17 +435,37 @@ export default function ConfirmarAsistencia() {
           {/* FINAL SUCCESS */}
           {visibleSteps.includes('submit') && (
             <div id="step-submit" className="form-step-block is-final-step fade-in">
-              <div className="form-final-block">
-                <p className="final-title-elegant">¡Todo listo!</p>
-                <p className="final-text-elegant">
-                  {formData.accompaniment === 'yes'
-                    ? 'Vuestra confirmación ha sido recibida correctamente.'
-                    : 'Tu confirmación ha sido recibida correctamente.'}
-                  <br/>
-                  {formData.accompaniment === 'yes'
-                    ? '¡Estamos deseando veros y celebrar juntos nuestro gran día!'
-                    : '¡Estamos deseando verte y celebrar juntos nuestro gran día!'}
-                </p>
+              <div className="final-two-column-layout">
+                {/* Left: Photo */}
+                <div className="final-photo-wrapper">
+                  <img 
+                    src="/images/photos/formulario_fiesta.jpg" 
+                    alt="Celebración" 
+                    className="final-celebration-photo"
+                  />
+                </div>
+                
+                {/* Right: Message Box */}
+                <div className="final-message-box">
+                  <p className="final-title-elegant">¡Nos vamos de fiesta!</p>
+                  <p className="final-text-elegant">
+                    {formData.accompaniment === 'yes'
+                      ? 'Vuestra confirmación ha sido recibida correctamente.'
+                      : 'Tu confirmación ha sido recibida correctamente.'}
+                    <br/>
+                    {formData.accompaniment === 'yes'
+                      ? '¡Estamos deseando veros y celebrar juntos nuestro gran día!'
+                      : '¡Estamos deseando verte y celebrar juntos nuestro gran día!'}
+                  </p>
+                  
+                  <button 
+                    onClick={handleSaveTheDate}
+                    className="btn-save-date"
+                  >
+                    <span className="btn-save-date-icon">📅</span>
+                    Añadir al calendario
+                  </button>
+                </div>
               </div>
             </div>
           )}

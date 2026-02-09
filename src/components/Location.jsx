@@ -9,9 +9,7 @@ export default function Location() {
             <h3 className="location-title">Ubicación</h3>
             <p className="location-text">El lugar elegido para la celebración es <strong>El Cigarral del Ángel</strong> en Toledo. </p>
             <p className="location-text">El más antiguo de los cigarrales toledanos que aun se conservan, es testimonio de la historia de la ciudad. Fue levantado como palacio árabe en el s.XI sobre restos romanos.</p>
-            <p className="location-text">Desde entonces ha ido cambiando de manos hasta nuestros días conformando un espacio único donde convergen arte, arquitectura, naturaleza y <strong>gastronomía</strong>.</p>
-            {/* <p className="location-text">Tanto la <strong>ceremonia civil</strong> como la posterior <strong>celebración</strong> tendrán lugar en este emblemático lugar en <strong>horario de día</strong>.</p>
-            <p className="location-text">En cuanto sepamos los horarios de la programación lo haremos saber.</p> */}
+            <p className="location-text">Desde entonces ha ido cambiando de manos hasta nuestros días, conformando un espacio único donde convergen arte, arquitectura, naturaleza y <strong>gastronomía</strong>.</p>
           </div>
 
           <aside className="location-aside">

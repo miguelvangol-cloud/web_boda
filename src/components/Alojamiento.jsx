@@ -31,8 +31,8 @@ export default function Alojamiento() {
     <section id="alojamiento" className="accom-section">
       <div className="container">
         <h3 className="location-title">Alojamiento</h3>
-        <p className="location-text">Si deseas descansar allí después de darlo todo el día de la boda o disfrutar del fin de semana en esta maravillosa ciudad te recomendamos <strong>reserves lo antes posible</strong>, ya que aunque Toledo tiene mucha oferta de alojamientos ¡Septiembre es un mes muy solicitado!</p>
-        <p className="location-text">Aquí van algunas recomendaciones que creemos que por ubicación y precio pueden ser interesantes, algunas con precio especial:</p>
+        <p className="location-text">Si deseas descansar allí después de darlo todo el día de la boda o disfrutar del fin de semana en esta maravillosa ciudad, te recomendamos que <strong>reserves lo antes posible</strong>, ya que, aunque Toledo tiene mucha oferta de alojamientos, ¡Septiembre es un mes muy solicitado!</p>
+        <p className="location-text">Aquí van unas recomendaciones que creemos que por ubicación y precio pueden ser interesantes, algunas con precio especial:</p>
       </div>
 
       <div className="container accom-grid">

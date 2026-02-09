@@ -42,6 +42,10 @@
 }
 
 /* === BASE === */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -238,7 +242,7 @@ section[id] { scroll-margin-top: -60px; }
 /* Header Media Queries */
 @media (min-width: 992px) {
   .menu-wrapper .menu-button { display: none; }
-  header {
+  .header-bar {
     position: sticky; top: 0; z-index: 60;
     background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
     backdrop-filter: blur(6px); border-bottom: 1px solid rgba(0,0,0,0.04);
@@ -463,9 +467,20 @@ section[id] { scroll-margin-top: -60px; }
 .timetable-img { max-width: 100%; height: auto; width: 1000px; display: block; }
 .timetable-desktop { display: block; }
 .timetable-mobile { display: none; }
+.timetable-subtitle {
+  font-family: 'Belleza', serif;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: -0.5rem; /* Increased margin from title */
+  margin-bottom: 3.5rem;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
 @media (max-width: 900px) {
   .timetable-desktop { display: none; }
   .timetable-mobile { display: block; width: 600px; margin: 0 auto; }
+  .timetable-subtitle { margin-top: -1rem; margin-bottom: 2rem; font-size: 1rem; }
 }
 
 /* === SECTION: ALOJAMIENTO === */
@@ -591,7 +606,7 @@ section[id] { scroll-margin-top: -60px; }
 }
 
 .assist-photo {
-  width: 80%;
+  width: 90%;
   height: auto;
   border-radius: 12px;
   display: block;
@@ -1251,9 +1266,44 @@ html {
 }
 
 .btn-elegant-next:hover,
-.btn-elegant-submit:hover {
+.btn-elegant-submit:hover:not(:disabled) {
   background: var(--verde-oliva-oscuro);
   letter-spacing: 0.2em;
+}
+
+.btn-elegant-submit:disabled {
+  background: var(--verde-oliva-claro);
+  opacity: 0.8;
+  cursor: not-allowed;
+  letter-spacing: 0.15em;
+}
+
+/* Spinner */
+.spinner-squad {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: squadSpin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  vertical-align: middle;
+}
+
+@keyframes squadSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-elegant-submit.is-loading {
+  position: relative;
+  background: var(--verde-oliva-oscuro) !important;
+  color: white !important;
+  cursor: wait;
+  min-height: 4rem; /* Ensure it doesn't collapse */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Transitions */
@@ -1273,22 +1323,76 @@ html {
 }
 
 /* === FINAL SUCCESS / FAREWELL STYLES === */
-.form-final-block {
-  text-align: center;
-  padding: 1.1rem 2.5rem;
+
+/* Two-column layout: Photo left, Message box right */
+.final-two-column-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  align-items: stretch; /* Match heights */
+}
+
+/* Photo wrapper - left column */
+.final-photo-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.final-celebration-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  display: block;
+  object-fit: cover; /* Important for filling space if heights differ */
+}
+
+/* Message box - right column */
+.final-message-box {
   background: var(--color-background);
-  position: relative;
-  max-width: 650px;
-  margin: 5rem auto;
-  /* border: 1px solid var(--verde-oliva-oscuro); */
+  padding: 2.5rem 1.5rem; /* Balanced horizontal padding */
+  border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center;
+  text-align: center;
+}
+
+/* Mobile: Stack vertically - message first, photo below */
+@media (max-width: 1024px) {
+  .final-two-column-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 500px;
+  }
+
+  .final-message-box {
+    order: 1;
+    padding: 1rem 1rem;
+  }
+
+  .final-photo-wrapper {
+    order: 2;
+  }
+}
+
+/* Centered wrapper for stand-alone message box (e.g., 'No' response) */
+.final-message-centered-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .final-title-elegant {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
   color: var(--verde-oliva-oscuro);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   letter-spacing: 0.05em;
   font-weight: 500;
   position: relative;
@@ -1303,16 +1407,16 @@ html {
   width: 80px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--amarillo), transparent);
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 .final-text-elegant {
   font-family: 'Belleza', serif;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--verde-oliva);
-  line-height: 1.8;
-  max-width: 480px;
-  margin: 1 auto;
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 /* === EMOJI & FIREWORKS EFFECTS === */
@@ -1342,6 +1446,48 @@ html {
   pointer-events: none;
   width: 1px;
   height: 1px;
+}
+/* Save the Date Button Styles */
+.btn-save-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: transparent;
+  border: 1px solid rgba(183, 134, 70, 0.3); /* Subtler border */
+  color: var(--color-muted); /* More discreet color */
+  padding: 0.7rem 1.4rem; /* Reduced padding */
+  border-radius: 50px;
+  font-family: 'Belleza', serif;
+  font-size: 0.85rem; /* Slightly smaller */
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  transition: all 0.35s ease;
+  cursor: pointer;
+  margin-top: 3rem; /* Extra separation */
+}
+
+.btn-save-date:hover {
+  border-color: var(--amarillo);
+  color: var(--verde-oliva-oscuro);
+  background-color: rgba(183, 134, 70, 0.05);
+  transform: translateY(-2px);
+}
+
+.btn-save-date:active {
+  transform: translateY(-1px);
+}
+
+.btn-save-date-icon {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 640px) {
+  .btn-save-date {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem; /* Reduced margin in mobile */
+  }
 }
 
 .firework-particle {
@@ -1379,18 +1525,135 @@ html {
 @media (max-width: 640px) {
   .form-header-elegant { 
     margin-bottom: 4rem; 
-    top: 60px; /* Slightly higher on mobile */
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(183, 134, 70, 0.1); /* Subtle divider when sticky */
+    border-bottom: 1px solid rgba(183, 134, 70, 0.1);
   }
   .assist-title-large { font-size: 1.8rem; margin-bottom: 1.5rem !important; }
   .btn-elegant-choice { width: 100%; padding: 0.85rem 1.5rem; font-size: 1rem; }
   .form-sequential-container { gap: 2rem !important; }
   .form-label-elegant { font-size: 1.5rem !important; margin-bottom: 0.75rem !important; }
   .form-step-block { padding-bottom: 1rem; }
-  .form-final-block { padding: 3rem 1.5rem; margin: 3rem 1rem; }
+  .final-message-box { padding: 2rem 1.5rem; }
   .form-step-block + .form-step-block::before {
-    top: -2rem; /* Centered in the 4rem mobile gap */
+    top: -2rem;
     width: 40px;
+  }
+}
+
+/* Dress Code Section */
+.dress-code-section {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding-top: 0rem;
+  padding-bottom: 8rem; /* Matches the 8rem padding of the assist-section above */
+  overflow: hidden; /* Safety against horizontal overflow */
+}
+
+.dress-code-section .assist-container {
+  width: 100%; /* Ensure it spans the full 1200px container */
+}
+
+.dress-code-section .final-message-box {
+  width: 100%;
+  padding: 2.5rem 2.5rem 4rem 2.5rem;
+  min-height: auto;
+  box-shadow: 0 15px 50px rgba(207, 165, 24, 0.08), 0 5px 20px rgba(0,0,0,0.03); /* Enhanced warm shadow */
+  border: 1px solid rgba(207, 165, 24, 0.15); /* Subtle golden border */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.dress-code-section .final-message-box:hover {
+  box-shadow: 0 20px 60px rgba(207, 165, 24, 0.12), 0 8px 25px rgba(0,0,0,0.05);
+  border-color: rgba(207, 165, 24, 0.25);
+}
+
+.dress-code-flex-layout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+  width: 100%;
+  max-width: 810px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dress-code-text-side {
+  flex: 1;
+}
+
+.dress-code-text-side .final-title-elegant {
+  align-items: center;
+  text-align: center;
+}
+
+.dress-code-text-side .final-title-elegant::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dress-code-text-side .final-text-elegant {
+  margin-left: 0;
+  max-width: none;
+  line-height: 1.8; /* Improved readability with more breathing room */
+}
+
+.dress-code-img-side {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dress-code-icon-img {
+  width: 180px;
+  height: auto;
+  opacity: 0.9;
+  margin-top: 1.5rem;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  animation: fadeInIcon 0.8s ease-out;
+}
+
+.dress-code-icon-img:hover {
+  transform: scale(1.05) rotate(2deg);
+  opacity: 1;
+}
+
+@keyframes fadeInIcon {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .dress-code-section {
+    padding-bottom: 8rem; /* Keep constant spacing even on tablet */
+  }
+  .dress-code-section .final-message-box {
+    padding: 1.5rem 1.5rem 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dress-code-section {
+    padding-top: 0rem;
+    padding-bottom: 8rem; /* Keep constant spacing even on mobile */
+  }
+  .dress-code-flex-layout {
+    gap: 0.75rem; /* Tighter gap to allow larger image */
+  }
+  .dress-code-icon-img {
+    width: 160px; /* Larger icon on mobile as requested */
+  }
+  .dress-code-text-side .final-text-elegant {
+    font-size: 0.85rem; /* Slightly smaller text to avoid excessive height */
   }
 }
