@@ -146,7 +146,7 @@ export default function Hero() {
         <section id="intro" className="intro-section">
           <div className="container intro-grid">
               <div className="intro-text">
-                <p className="intro-text-left">"Hace ya más de 8 años tuvimos la suerte de que nuestros caminos se cruzaran. Después de todo este tiempo, sentimos que ha llegado el momento de celebrarlo juntos."</p>
+                <p className="intro-text-left">"Después de unos cuantos años juntos y un poco de negociación... podemos decir que <strong>¡nos casamos!</strong>"</p>
                 <p className="intro-text-right">"Queremos que nuestro día sea especial e inolvidable y para ello os necesitamos, ya que sois parte fundamental de nuestras vidas."</p>
                 <p className="intro-text-center-small">En esta página encontraréis toda la información necesaria; aun así, no dudéis en preguntarnos cualquier cosa que necesitéis.</p>
               </div>
