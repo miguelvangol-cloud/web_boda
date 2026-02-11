@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { track } from "@vercel/analytics";
 
 export default function ListaBoda() {
   const [copied, setCopied] = useState(false);
@@ -8,6 +9,7 @@ export default function ListaBoda() {
     try {
       await navigator.clipboard.writeText(iban.replace(/\s/g, ''));
       setCopied(true);
+      track('Copy_IBAN');
       setTimeout(() => setCopied(false), 2500);
     } catch (err) {
       console.error('Error al copiar:', err);

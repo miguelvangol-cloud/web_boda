@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Location from "./components/Location";
@@ -65,6 +67,8 @@ function HomePage() {
   );
 }
 
+
+
 export default function App() {
   return (
     <Router>
@@ -82,6 +86,8 @@ export default function App() {
           <Footer />
         </div>
       </div>
+      <Analytics />
+      <SpeedInsights />
     </Router>
   );
 }

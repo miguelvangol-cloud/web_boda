@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { track } from "@vercel/analytics";
 
 export default function Assist() {
   return (
@@ -12,7 +13,12 @@ export default function Assist() {
             </div>
             <div className="assist-text-col">
               <h2 id="assist-title" className="assist-title-large" style={{ viewTransitionName: 'assist-title' }}>¿Nos acompañarás en nuestro día?</h2>
-              <Link viewTransition to="/confirmar-asistencia" className="assist-form-btn-link">
+              <Link 
+                viewTransition 
+                to="/confirmar-asistencia" 
+                className="assist-form-btn-link"
+                onClick={() => track('Click_RSVP_Principal')}
+              >
                 <img src="/images/photos/rellenar_formulario.png" alt="Rellenar formulario" className="assist-form-btn-img" />
               </Link>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { track } from "@vercel/analytics";
 import sadEmoji from '../assets/sad-emoji.png';
 
 export default function ConfirmarAsistencia() {
@@ -7,7 +8,6 @@ export default function ConfirmarAsistencia() {
     accompaniment: null, // 'yes', 'no'
     names: '', // User's name
     companionName: '', // Companion's name
-    bus: null, // 'yes', 'no'
     allergies: ''
   });
 
@@ -25,7 +25,6 @@ export default function ConfirmarAsistencia() {
       accompaniment: null,
       names: '',
       companionName: '',
-      bus: null,
       allergies: ''
     });
     setVisibleSteps(['attendance']);
@@ -50,6 +49,7 @@ export default function ConfirmarAsistencia() {
         setTimeout(() => setVisibleSteps(prev => [...prev, 'accompaniment']), 300);
       }
     } else {
+      track('RSVP_No');
       setVisibleSteps(['attendance', 'farewell-no']);
       triggerEffect('sad');
     }
@@ -85,25 +85,20 @@ export default function ConfirmarAsistencia() {
     if (formData.names.trim()) {
       if (formData.accompaniment === 'yes' && !visibleSteps.includes('companionName')) {
         setVisibleSteps(prev => [...prev, 'companionName']);
-      } else if (formData.accompaniment === 'no' && !visibleSteps.includes('bus')) {
-        setVisibleSteps(prev => [...prev, 'bus']);
+      } else if (formData.accompaniment === 'no' && !visibleSteps.includes('allergies')) {
+        setVisibleSteps(prev => [...prev, 'allergies']);
       }
     }
   };
 
   const handleCompanionNameSubmit = (e) => {
     e.preventDefault();
-    if (formData.companionName.trim() && !visibleSteps.includes('bus')) {
-      setVisibleSteps(prev => [...prev, 'bus']);
+    if (formData.companionName.trim() && !visibleSteps.includes('allergies')) {
+      setVisibleSteps(prev => [...prev, 'allergies']);
     }
   };
 
-  const handleBusChoice = (choice) => {
-    setFormData(prev => ({ ...prev, bus: choice }));
-    if (!visibleSteps.includes('allergies')) {
-      setTimeout(() => setVisibleSteps(prev => [...prev, 'allergies']), 300);
-    }
-  };
+
 
   const handleAllergiesSubmit = async (e) => {
     e.preventDefault();
@@ -137,6 +132,7 @@ export default function ConfirmarAsistencia() {
           await new Promise(resolve => setTimeout(resolve, minDuration - duration));
         }
         setIsSubmitting(false);
+        track('RSVP_Si');
         // Show success message ONLY after finishing loading
         setVisibleSteps(prev => [...prev, 'submit']);
       }
@@ -147,6 +143,7 @@ export default function ConfirmarAsistencia() {
   };
 
   const handleSaveTheDate = () => {
+    track('Click_Calendario');
     const event = {
       title: "Boda Celia y Miguel",
       description: "¡Nos vamos de fiesta! Celebración de la boda de Celia y Miguel.",
@@ -208,8 +205,7 @@ END:VCALENDAR`;
                 <button 
                   onClick={() => { 
                     setFormData({ 
-                      attendance: null, accompaniment: null, names: '', companionName: '', 
-                      bus: null, allergies: '', comments: '' 
+                      attendance: null, accompaniment: null, names: '', companionName: '', allergies: '', comments: '' 
                     }); 
                     setVisibleSteps(['attendance']); 
                   }} 
@@ -256,7 +252,7 @@ END:VCALENDAR`;
                   </span>
                   <button 
                     onClick={() => { 
-                      setFormData(prev => ({ ...prev, accompaniment: null, names: '', companionName: '', bus: null, allergies: '' })); 
+                      setFormData(prev => ({ ...prev, accompaniment: null, names: '', companionName: '', allergies: '' })); 
                       setVisibleSteps(['attendance', 'accompaniment']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
@@ -274,12 +270,12 @@ END:VCALENDAR`;
               <label className="form-label-elegant">
                 Dinos tu nombre completo
               </label>
-              {(formData.accompaniment === 'yes' ? visibleSteps.includes('companionName') : visibleSteps.includes('bus')) ? (
+              {(formData.accompaniment === 'yes' ? visibleSteps.includes('companionName') : visibleSteps.includes('allergies')) ? (
                 <div className="form-answer-display text-center">
                   <span className="form-answer-value">{formData.names}</span>
                   <button 
                     onClick={() => { 
-                      setFormData(prev => ({ ...prev, names: '', companionName: '', bus: null, allergies: '' })); 
+                      setFormData(prev => ({ ...prev, names: '', companionName: '', allergies: '' })); 
                       setVisibleSteps(['attendance', 'accompaniment', 'names']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
@@ -313,12 +309,12 @@ END:VCALENDAR`;
               <label className="form-label-elegant">
                 ¿Cuál es el nombre de tu acompañante?
               </label>
-              {visibleSteps.includes('bus') ? (
+              {visibleSteps.includes('allergies') ? (
                 <div className="form-answer-display text-center">
                   <span className="form-answer-value">{formData.companionName}</span>
                   <button 
                     onClick={() => { 
-                      setFormData(prev => ({ ...prev, companionName: '', bus: null, allergies: '' })); 
+                      setFormData(prev => ({ ...prev, companionName: '', allergies: '' })); 
                       setVisibleSteps(['attendance', 'accompaniment', 'names', 'companionName']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
@@ -346,41 +342,7 @@ END:VCALENDAR`;
             </div>
           )}
 
-          {/* STEP 5: Bus (New Step) */}
-          {visibleSteps.includes('bus') && (
-            <div id="step-bus" className="form-step-block fade-in">
-              <label className="form-label-elegant text-2xl font-heading text-verde-oliva-oscuro block text-center mb-6">
-                ¿Te apuntas al bus que saldrá desde Illescas?
-              </label>
-              
-              {formData.bus === null ? (
-                <div className="flex flex-col sm:flex-row gap-6 justify-center max-w-md mx-auto">
-                  <button onClick={() => handleBusChoice('yes')} className="btn-elegant-choice primary">Sí, ¡me apunto!</button>
-                  <button onClick={() => handleBusChoice('no')} className="btn-elegant-choice outline">No, iré por mi cuenta</button>
-                </div>
-              ) : (
-                <div className="form-answer-display text-center">
-                  <span className="form-answer-value">
-                    {formData.bus === 'yes' ? 'Sí, ¡me apunto!' : 'No, iré por mi cuenta'}
-                  </span>
-                  <button 
-                    onClick={() => { 
-                      setFormData(prev => ({ ...prev, bus: null, allergies: '' })); 
-                      setVisibleSteps(prev => {
-                        const baseSteps = ['attendance', 'accompaniment', 'names'];
-                        if (formData.accompaniment === 'yes') baseSteps.push('companionName');
-                        baseSteps.push('bus');
-                        return baseSteps;
-                      });
-                    }} 
-                    className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
-                  >
-                    Cambiar
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+
 
           {/* STEP 6: Allergies (Formerly Step 5) */}
           {visibleSteps.includes('allergies') && (
@@ -397,7 +359,7 @@ END:VCALENDAR`;
                   </span>
                   <button 
                     onClick={() => { 
-                      setVisibleSteps(['attendance', 'accompaniment', 'names', 'companionName', 'bus', 'allergies']); 
+                      setVisibleSteps(['attendance', 'accompaniment', 'names', 'companionName', 'allergies']); 
                     }} 
                     className={`btn-change-subtle ${visibleSteps.includes('submit') ? 'is-hidden' : ''}`}
                   >

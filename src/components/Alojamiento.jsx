@@ -1,4 +1,5 @@
 import React from 'react';
+import { track } from "@vercel/analytics";
 
 const hotels = [
   {
@@ -15,7 +16,8 @@ const hotels = [
     image: '/images/accom/hotel_labastida.jpg',
     website: 'https://www.hotellabastida.com/',
     mapsQuery: 'Hotel La Bastida Toledo',
-    text: <>10% de descuento reservando a trevés del correo electrónico <strong>reservas@hotellabastida.com</strong> con concepto <strong>'Boda Celia y Miguel'</strong></>
+    text: <>10% de descuento reservando a trevés del correo electrónico <strong>reservas@hotellabastida.com</strong> con concepto <strong>'Boda Celia y Miguel'</strong></>,
+    downloadFile: '/la_bastida_tarifa.pdf'
   },
   {
     id: 3,
@@ -46,6 +48,16 @@ export default function Alojamiento() {
               {h.text && <p className="accom-text">{h.text}</p>}
               <div className="accom-links">
                 <a className="accom-site external-link-hint" href={h.website} target="_blank" rel="noopener noreferrer">Visitar web</a>
+                {h.downloadFile && (
+                  <a 
+                    className="accom-download-btn" 
+                    href={h.downloadFile} 
+                    download="Tarifas La Bastida.pdf"
+                    onClick={() => track('Download_Tarifas_Bastida')}
+                  >
+                    Ver tarifas
+                  </a>
+                )}
                 <a className="accom-map-btn" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.mapsQuery)}`} target="_blank" rel="noopener noreferrer">Ver en maps</a>
               </div>
             </div>
