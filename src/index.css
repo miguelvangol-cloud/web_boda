@@ -620,13 +620,29 @@ section[id] { scroll-margin-top: -60px; }
   background: var(--amarillo); 
   color: white; 
   border-radius: 999px; 
-  padding: 0.4rem 0.75rem; 
+  padding: 0.4rem 0.8rem; 
   text-decoration: none; 
   font-weight: 700; 
   font-family: 'Belleza', serif;
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+}
+.map-icon {
+  flex-shrink: 0;
 }
 .accom-map-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+@media (max-width: 400px) {
+  .accom-links { gap: 0.4rem; }
+  .accom-site { font-size: 0.8rem; }
+  .accom-download-btn { font-size: 0.75rem; padding: 0.35rem 0.7rem; }
+  .map-text { display: none; } /* Hide text to save space */
+  .accom-map-btn { padding: 0.4rem 0.6rem; }
+}
+
 @media (max-width: 900px) {
   .accom-grid { 
     grid-template-columns: 1fr; 

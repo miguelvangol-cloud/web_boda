@@ -58,7 +58,20 @@ export default function Alojamiento() {
                     Ver tarifas
                   </a>
                 )}
-                <a className="accom-map-btn" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.mapsQuery)}`} target="_blank" rel="noopener noreferrer">Ver en maps</a>
+                <a 
+                  className="accom-map-btn" 
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.mapsQuery)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => track('Click_Mapa')}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="map-icon">
+                    <path d="M1 6V22L8 18L16 22L23 18V2L16 6L8 2L1 6Z" />
+                    <path d="M8 2V18" />
+                    <path d="M16 6V22" />
+                  </svg>
+                  <span className="map-text">Ver en maps</span>
+                </a>
               </div>
             </div>
           </article>
